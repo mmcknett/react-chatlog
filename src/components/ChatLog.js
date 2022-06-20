@@ -12,6 +12,8 @@ const ChatLog = (props) => {
           sender={message.sender}
           body={message.body}
           timeStamp={message.timeStamp}
+          liked={message.liked}
+          toggleHeartCallback={props.toggleHeartCallback}
         />
       </li>
     );
@@ -21,7 +23,7 @@ const ChatLog = (props) => {
 };
 
 // ChatLog.propTypes = {
-//   messages: PropTypes.,
+//   entries: PropTypes.array.isRequired,
 // };
 
 export default ChatLog;
