@@ -9,12 +9,10 @@ const App = () => {
   const toggleHeart = (id) => {
     const newEntries = entries.map(
       (entry) => {
-        const newEntry = {...entry};
-        if (newEntry.id === id) {
-          newEntry.liked = !newEntry.liked;
+        if (entry.id === id) {
+          return { ...entry, liked: !entry.liked };
         }
-        
-        return newEntry;
+        return entry;
       }
     );
 
