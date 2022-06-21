@@ -5,41 +5,38 @@ import { useState } from 'react';
 
 const App = () => {
   const [entries, setEntries] = useState(chatMessages);
-  const [likes, setLikes] = useState(0);
 
   const toggleHeart = (id) => {
-    let currentLikes = 0;
-    for (const entry of entries) {
-      if (entry.id === id) {
-        entry.liked = !entry.liked;
+    const newEntries = entries.map(
+      (entry) => {
+        const newEntry = {...entry};
+        if (newEntry.id === id) {
+          newEntry.liked = !newEntry.liked;
+        }
+        
+        return newEntry;
       }
-      if (entry.liked === true) {
-        currentLikes += 1;
-      }
-    }
-    const newEntries = [...entries];
+    );
+
     setEntries(newEntries);
-    setLikes(currentLikes);
   };
 
-  // const countLikes = () => {
-  //   let currentLikes = 0;
-  //   for (const entry of entries) {
-  //     if (entry.liked === true) {
-  //       currentLikes += 1;
-  //     }
-  //   }
-  //   setLikes(currentLikes);
-  // };
+
+  let currentLikes = 0;
+  for (const entry of entries) {
+    if (entry.liked === true) {
+      currentLikes += 1;
+    }
+  }
 
   return (
     <div id="App">
       <header>
         <h1>Chat between Vladimir and Estragon</h1>
-        <h2>{likes} ❤️s</h2>
+        <h2>{currentLikes} ❤️s</h2>
       </header>
       <main>
-        <ChatLog entries={chatMessages} toggleHeartCallback={toggleHeart} />
+        <ChatLog entries={entries} toggleHeartCallback={toggleHeart} />
       </main>
     </div>
   );
